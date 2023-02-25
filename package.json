@@ -1,5 +1,5 @@
 {
-  "name": "JSCONF2023",
+  "name": "events-assistants",
   "private": true,
   "scripts": {
     "dev": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next dev",
@@ -9,9 +9,8 @@
   },
   "dependencies": {
     "@elastic/apm-rum": "^5.12.0",
-    "@prisma/client": "^4.9.0",
     "bootstrap": "^5.2.3",
-    "elastic-apm-node": "github:elastic/apm-agent-nodejs#main",
+    "elastic-apm-node": "^3.42.0",
     "fs": "^0.0.1-security",
     "next": "latest",
     "react": "18.2.0",
