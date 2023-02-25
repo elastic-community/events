@@ -55,7 +55,6 @@ export default  function index() {
     setPhone("");
     setReason("");
   };
-
   return (
     <div className={styles.container}>
       <h1> Welcome to our event</h1>
