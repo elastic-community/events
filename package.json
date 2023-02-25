@@ -5,6 +5,7 @@
     "dev": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next dev",
     "build": "next build",
     "start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
+    "vercel-start": "NODE_OPTIONS=--require=elastic-apm-node/start-next.js next start",
     "lint": "next lint"
   },
   "dependencies": {
