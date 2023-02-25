@@ -1,123 +1,85 @@
-import Head from 'next/head'
-import Image from 'next/image'
-import { Inter } from '@next/font/google'
-import styles from '@/styles/Home.module.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import styles from '../styles/Home.module.css';
+import { BsSearch } from "react-icons/bs";
+import { useState, useEffect } from 'react';
+import Link from 'next/link'
+import apm from '../rum'
 
-export default function Home() {
+async function GetMoney(money){
+
+  let moneyApi,moneyResult;
+  switch(money) {
+    case "dolar":
+      moneyApi="dolar"
+      moneyResult="Dolares";
+      break;
+    case "euro":
+      moneyApi="euro"
+      moneyResult="Euros";
+      break;
+    default:
+      return
+  }
+  const span = apm.startSpan('receiving body')
+
+   
+    
+    
+  const transaction = apm.startTransaction('Click get Data', 'custom')
+  const url = `https://api.cmfchile.cl/api-sbifv3/recursos_api/${moneyApi}/2023?apikey=1691a400e015a7310152a544db165df6bf613975&formato=json`
+  const httpSpan = transaction.startSpan('GET ' + url, 'external.http')
+
+  let results = await fetch(url);
+  results = await results.json()
+  httpSpan.end()
+  transaction.end()
+
+  if (span) span.end()
+
+  return  0
+}
+
+
+export default  function index() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [reason, setReason] = useState("");
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Aquí podrías enviar los datos del formulario al servidor para guardarlos en la base de datos
+    console.log({ name, email, phone, reason });
+    setName("");
+    setEmail("");
+    setPhone("");
+    setReason("");
+  };
+
   return (
-    <>
-      <Head>
-        <title>Elastic Community Meetups Events</title>
-        <meta name="description" content="Elastic Community Meetups Events" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-             Example &nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
+    <div className={styles.container}>
+      
+      <form >
+      <div className="mb-3">
+        <label htmlFor="exampleFormControlInput1" className="form-label">Nombre</label>
+        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="exampleFormControlInput1" className="form-label">Email address</label>
+        <input type="email" className="form-control" id="exampleFormControlInput1" placeholder="name@example.com" />
+      </div>
+      <div className="mb-3">
+        <label htmlFor="exampleFormControlTextarea1" className="form-label">Example textarea</label>
+        <textarea className="form-control" id="exampleFormControlTextarea1" rows={3} defaultValue={""} />
+      </div>
 
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
+      <button type="submit" className="btn btn-primary">Submit</button>
 
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-    </>
+    </form>
+    </div>
   )
 }
