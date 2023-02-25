@@ -1,7 +1,7 @@
 # English Version - Version Ingles
 ## How to add Elastic Search observability to your Next.js project 
 
-This application was presented at the JSConf Chile workshop in 2023. We introduced an application that focuses on Chilean national parks using the Next.js technology with Server Side Render.
+This application 
 
 Let's prepare the project by running the following commands:
 
