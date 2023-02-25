@@ -58,7 +58,8 @@ export default  function index() {
 
   return (
     <div className={styles.container}>
-      
+      <h1> {process.env.ELASTIC_APM_SERVER_URL}</h1>
+
       <form>
         <div className="form-group row">
           <label className="col-4">Language</label> 
