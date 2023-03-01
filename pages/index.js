@@ -73,7 +73,7 @@ export default  function index() {
             </div>
             <div className="custom-control custom-radio custom-control-inline">
               <input name="lang" id="lang_2" type="radio" className="custom-control-input" defaultValue="fish" required="required" /> 
-              <label htmlFor="lang_2" className="custom-control-label">Portuguez</label>
+              <label htmlFor="lang_2" className="custom-control-label">Português</label>
             </div>
           </div>
         </div>
