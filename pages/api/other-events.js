@@ -1,4 +1,4 @@
-import apm from 'elastic-apm-node'
+import apm from '@/OTEL-initializer'
 
 
 
