@@ -45,6 +45,7 @@ export default async function handler(req, res) {
     body: person
   })
  
+  console.log("Person: ", person)
   res.status(200).json(person);
   span.end();
 }
