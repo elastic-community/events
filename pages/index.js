@@ -43,7 +43,7 @@ export default  function index() {
     <div className={styles.container}>
       <h1> Welcome to our event</h1>
 
-      {register?<form onSubmit={handleSubmit}>
+      {!register?<form onSubmit={handleSubmit}>
         <Language lang={lang} setLang={setLang} />
         <Profile lang={lang} person={person} />
         <Interest lang={lang} person={person} />
