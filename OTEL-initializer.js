@@ -10,7 +10,7 @@ import { OTLPTraceExporter } from '@opentelemetry/exporter-trace-otlp-grpc';
 
 const provider = new BasicTracerProvider({
   resource: new Resource({
-    [SemanticResourceAttributes.SERVICE_NAME]: 'Events-assistant',
+    [SemanticResourceAttributes.SERVICE_NAME]: 'events-assistant',
   }),
 });
 
@@ -19,5 +19,5 @@ provider.addSpanProcessor(new SimpleSpanProcessor(new ConsoleSpanExporter()));
 
 provider.register();
 
-export const tracer = trace.getTracer('Events-assis-tracer');
+export const tracer = trace.getTracer('events-assistant-tracer');
 export { context };
