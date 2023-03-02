@@ -22,9 +22,9 @@ export default async function handler(req, res) {
         lastName: data.lastName,
         email: data.email,
         work: data.work,
-        comments:data.comments
+        comments:data.comments,
+        code: data.code
     }
-    
     person.localGroupField = en["localGroupField_"+data.localGroupField]
     person.familyWithElastic = en["familyWithElastic_"+data.familyWithElastic]
     person.interestElasticCommunity = en["interestElasticCommunity_"+data.interestElasticCommunity]

@@ -17,6 +17,7 @@ export default  function index() {
   const [lang, setLang] = useState(en);
   const [register, setRegister] = useState(false);
   const person = {};
+  person.code = lang.code;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
