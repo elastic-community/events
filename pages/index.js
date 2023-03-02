@@ -15,32 +15,41 @@ import Comments from '@/components/form/5_comments';
 
 export default  function index() {
   const [lang, setLang] = useState(en);
+  const [register, setRegister] = useState(false);
+  const person = {};
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [reason, setReason] = useState("");
-
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    // Aquí podrías enviar los datos del formulario al servidor para guardarlos en la base de datos
-    console.log({ name, email, phone, reason });
-    setName("");
-    setEmail("");
-    setPhone("");
-    setReason("");
+    const span = apm.startSpan('receiving body')
+    const transaction = apm.startTransaction('Click get Data', 'custom')
+    const url = `/api/assistant`
+    const httpSpan = transaction.startSpan('POST ' + url, 'external.http')
+  
+
+    let results = await fetch(url,{
+      method: 'POST',
+      body: JSON.stringify(person),
+    });
+
+  
+    httpSpan.end()
+    transaction.end()
+    span.end()
+    setRegister(true);
+  
+
   };
   return (
     <div className={styles.container}>
       <h1> Welcome to our event</h1>
 
-      <form>
+      {register?<form onSubmit={handleSubmit}>
         <Language lang={lang} setLang={setLang} />
-        <Profile lang={lang} />
-        <Interest lang={lang} />
-        <Agree lang={lang} />
-        <Comments lang={lang} />
-      </form>
+        <Profile lang={lang} person={person} />
+        <Interest lang={lang} person={person} />
+        <Agree lang={lang} person={person} />
+        <Comments lang={lang} person={person} />
+      </form>:<h1>{lang.success}</h1>}
     </div>
   )
 }

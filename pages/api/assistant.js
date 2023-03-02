@@ -1,15 +1,50 @@
 import { tracer, context } from '../../OTEL-initializer.js';
+import en from '../../components/languages/en'
+const { Client } = require('@elastic/elasticsearch')
+
+const client = new Client({
+  cloud: {
+    id: "My_deployment:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyRjMWM2YzZmMzAzM2I0MTljYmNhMzdlNDdjMGUxZDUxYSRmOWFmY2JhZTQ1ZWY0ZjhiOWJkYTgwNjU0MWE3NTFkZA=="
+  },
+  auth: {
+    username: "elastic",
+    password: "v4BvQiWzpo3B4ZGSGcyVkQ2i"
+  }
+})
+
 
 export default async function handler(req, res) {
 
-  
 
-  const span = tracer.startSpan('handler', undefined, context.active());
-  const ms = Math.floor(Math.random() * 1000);
-  span.setAttribute('sleep', ms);
-  await new Promise((resolve) => setTimeout(resolve, ms));
-  res.status(200).json({ greetings: `Hi there ${ms}!` });
+
+    let data = JSON.parse(req.body)
+    let person = { name:data.name,
+        lastName: data.lastName,
+        email: data.email,
+        work: data.work,
+        comments:data.comments
+    }
+    
+    person.localGroupField = en["localGroupField_"+data.localGroupField]
+    person.familyWithElastic = en["familyWithElastic_"+data.familyWithElastic]
+    person.interestElasticCommunity = en["interestElasticCommunity_"+data.interestElasticCommunity]
+    person.organizerMeetup = en["organizerMeetup_"+data.organizerMeetup]
+    person.familyContributeProgram = en["familyContributeProgram_"+data.familyContributeProgram]
+    person.comercialTeam = en["comercialTeam_"+data.comercialTeam]
+    person.acceptMarketing = en["acceptMarketing_"+data.acceptMarketing]
+    person["@timestamp"] = new Date().toISOString()
+
+  const span = tracer.startSpan(req.url, undefined, context.active());
+  span.setAttribute('http.method', req.method);
+    span.setAttribute('http.url', req.url);
+    span.setAttribute('http.status_code', 200);
+    span.setAttribute('trace.id', req.traceId);
+
+  await client.index({
+    index: 'assistants',
+    body: person
+  })
+ 
+  res.status(200).json(person);
   span.end();
-
-
 }

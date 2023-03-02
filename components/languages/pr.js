@@ -38,5 +38,6 @@ const lang = {
     acceptMarketing_2: 'Não',
     comercialTeam_1: 'Sim',
     comercialTeam_2: 'Não',
+    success: 'Obrigado por se registrar!',
 }
 export default lang;
