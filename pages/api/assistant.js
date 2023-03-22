@@ -4,11 +4,11 @@ const { Client } = require('@elastic/elasticsearch')
 
 const client = new Client({
   cloud: {
-    id: "My_deployment:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyRjMWM2YzZmMzAzM2I0MTljYmNhMzdlNDdjMGUxZDUxYSRmOWFmY2JhZTQ1ZWY0ZjhiOWJkYTgwNjU0MWE3NTFkZA=="
+    id: "uchile:dXMtY2VudHJhbDEuZ2NwLmNsb3VkLmVzLmlvOjQ0MyQ1OTVmYjkwYmRkYjQ0MGQzYjBlZTk1NDIyYTMxZjg3OSRhODM1MjFhODQ2MjA0MmRhOWFiZDQwZWI2NzQ5ZTVmYQ=="
   },
   auth: {
     username: "elastic",
-    password: "v4BvQiWzpo3B4ZGSGcyVkQ2i"
+    password: "HMspwPt2SLOSPZEcEWUA3JrR"
   }
 })
 
