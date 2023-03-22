@@ -3,7 +3,7 @@ const lang = {
     language: 'Português',
     code: 'pr',
     name: 'Nome',
-    lastName: 'Sobrenome',
+    lastName: 'Sobrenome!!',
     email: 'E-mail',
     work: 'Empresa, Universidade, outro:',
     localGroupField: 'Você tem interesse em participar do seu grupo de usuários locais do Elastic?',
