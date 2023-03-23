@@ -6,8 +6,7 @@ var apm = initApm({
   serviceName: 'events-assistant-frontend',
 
   // Set custom APM Server URL (default: http://localhost:8200)
-  serverUrl: "https://uchile.apm.us-central1.gcp.cloud.es.io",
-
+  serverUrl: process.env.OTEL_EXPORTER_OTLP_ENDPOINT,
   // Set the service version (required for source map feature)
   serviceVersion: '1.0',
 
